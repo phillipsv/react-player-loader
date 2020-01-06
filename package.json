@@ -1,5 +1,5 @@
 {
-  "name": "@brightcove/react-player-loader",
+  "name": "react-player-loader",
   "version": "1.3.0",
   "description": "The official react component for the Brightcove Player",
   "main": "dist/brightcove-react-player-loader.cjs.js",
