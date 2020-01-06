@@ -1,5 +1,5 @@
 import React from 'react';
-import playerLoader from '@brightcove/player-loader';
+import playerLoader from 'player-loader';
 
 /**
  * These prop changes can be handled by an internal player state change rather

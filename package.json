@@ -68,7 +68,7 @@
     "test/"
   ],
   "dependencies": {
-    "@brightcove/player-loader": "^1.7.1"
+    "player-loader": "https://github.com/phillipsv/player-loader/tarball/master"
   },
   "devDependencies": {
     "@testing-library/react": "^8.0.1",
