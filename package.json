@@ -68,7 +68,7 @@
     "test/"
   ],
   "dependencies": {
-    "player-loader": "https://github.com/phillipsv/player-loader/tarball/master"
+    "player-loader": "git+https://github.com/phillipsv/player-loader.git"
   },
   "devDependencies": {
     "@testing-library/react": "^8.0.1",
