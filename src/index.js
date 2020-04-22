@@ -99,7 +99,7 @@ class ReactPlayerLoader extends React.Component {
 
         // Call a user-provided onSuccess callback.
         if (typeof userSuccess === 'function') {
-          userSuccess({ref, type});
+          userSuccess({ref, type, playerLoader});
         }
       },
       onFailure: (error) => {

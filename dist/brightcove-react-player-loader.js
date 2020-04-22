@@ -1308,7 +1308,8 @@
           if (typeof userSuccess === 'function') {
             userSuccess({
               ref: ref,
-              type: type
+              type: type,
+              playerLoader: brightcovePlayerLoader
             });
           }
         },
