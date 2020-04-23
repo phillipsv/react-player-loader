@@ -4,8 +4,8 @@
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var React = _interopDefault(require('react'));
-var document = _interopDefault(require('global/document'));
 var window = _interopDefault(require('global/window'));
+var document = _interopDefault(require('global/document'));
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -771,7 +771,7 @@ var getBcGlobalKeys = function getBcGlobalKeys() {
 
 var getGlobalKeys = function getGlobalKeys() {
   return Object.keys(window).filter(function (k) {
-    return /^videojs/i.test(k) || /^(bc)$/.test(k);
+    return /^videojs/i.test(k) || /^(bc)$/.test(k) || k === 'shaka' || k === 'muxjs';
   });
 };
 /**
@@ -1329,9 +1329,20 @@ function (_React$Component) {
 
 
     delete options.attrs;
-    delete options.baseUrl; // If a base URL is provided, it should only apply to this player load.
+    delete options.baseUrl; // always set embed id
+
+    if (!options.embedId) {
+      options.embedId = 'default';
+    } // If player already exists on the page, if not, its a new player, lets reset everything
+
+
+    if (window.bc && !window.bc[options.playerId + "_" + options.embedId]) {
+      // lets reset
+      brightcovePlayerLoader.reset();
+    } // If a base URL is provided, it should only apply to this player load.
     // This means we need to back up the original base URL and restore it
     // _after_ we call player loader.
+
 
     var originalBaseUrl = brightcovePlayerLoader.getBaseUrl();
 

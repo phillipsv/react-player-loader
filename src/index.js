@@ -1,4 +1,5 @@
 import React from 'react';
+import window from 'global/window';
 import playerLoader from 'player-loader';
 
 /**
@@ -123,6 +124,17 @@ class ReactPlayerLoader extends React.Component {
     // Delete props that are not meant to be passed to player-loader.
     delete options.attrs;
     delete options.baseUrl;
+
+    // always set embed id
+    if (!options.embedId) {
+      options.embedId = 'default';
+    }
+
+    // If player already exists on the page, if not, its a new player, lets reset everything
+    if (window.bc && !window.bc[`${options.playerId}_${options.embedId}`]) {
+      // lets reset
+      playerLoader.reset();
+    }
 
     // If a base URL is provided, it should only apply to this player load.
     // This means we need to back up the original base URL and restore it

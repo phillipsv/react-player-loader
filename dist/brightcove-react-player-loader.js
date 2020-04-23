@@ -1,13 +1,13 @@
 /*! @name react-player-loader @version 1.3.0 @license Apache-2.0 */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('global/document'), require('global/window')) :
-  typeof define === 'function' && define.amd ? define(['react', 'global/document', 'global/window'], factory) :
-  (global = global || self, global.BrightcoveReactPlayerLoader = factory(global.React, global.document, global.window));
-}(this, (function (React, document, window) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('global/window'), require('global/document')) :
+  typeof define === 'function' && define.amd ? define(['react', 'global/window', 'global/document'], factory) :
+  (global = global || self, global.BrightcoveReactPlayerLoader = factory(global.React, global.window, global.document));
+}(this, (function (React, window, document) { 'use strict';
 
   React = React && React.hasOwnProperty('default') ? React['default'] : React;
-  document = document && document.hasOwnProperty('default') ? document['default'] : document;
   window = window && window.hasOwnProperty('default') ? window['default'] : window;
+  document = document && document.hasOwnProperty('default') ? document['default'] : document;
 
   function _extends() {
     _extends = Object.assign || function (target) {
@@ -773,7 +773,7 @@
 
   var getGlobalKeys = function getGlobalKeys() {
     return Object.keys(window).filter(function (k) {
-      return /^videojs/i.test(k) || /^(bc)$/.test(k);
+      return /^videojs/i.test(k) || /^(bc)$/.test(k) || k === 'shaka' || k === 'muxjs';
     });
   };
   /**
@@ -1331,9 +1331,20 @@
 
 
       delete options.attrs;
-      delete options.baseUrl; // If a base URL is provided, it should only apply to this player load.
+      delete options.baseUrl; // always set embed id
+
+      if (!options.embedId) {
+        options.embedId = 'default';
+      } // If player already exists on the page, if not, its a new player, lets reset everything
+
+
+      if (window.bc && !window.bc[options.playerId + "_" + options.embedId]) {
+        // lets reset
+        brightcovePlayerLoader.reset();
+      } // If a base URL is provided, it should only apply to this player load.
       // This means we need to back up the original base URL and restore it
       // _after_ we call player loader.
+
 
       var originalBaseUrl = brightcovePlayerLoader.getBaseUrl();
 

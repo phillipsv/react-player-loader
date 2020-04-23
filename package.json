@@ -68,7 +68,8 @@
     "test/"
   ],
   "dependencies": {
-    "player-loader": "git+https://github.com/phillipsv/player-loader.git"
+    "player-loader": "git+https://github.com/phillipsv/player-loader.git",
+    "global": "^4.3.2"
   },
   "devDependencies": {
     "@testing-library/react": "^8.0.1",
